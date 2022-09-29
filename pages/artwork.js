@@ -7,7 +7,6 @@ import ArtworkContainer from '../components/ArtworkContainer/ArtworkContainer';
 import GlobalNavigation from '../components/GlobalNavigation/GlobalNavigation';
 import Footer from '../components/Footer/Footer';
 import { ArtworkProvider } from '../context/artwork.context';
-import { ArtworkContext } from '../context/artwork.context';
 
 export default function Artwork() {
 
