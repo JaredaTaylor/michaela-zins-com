@@ -11,8 +11,12 @@ import Spinner from '../spinner/spinner';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 
+function compareDates(a, b) {
+    return b.year - a.year;
+}
+
 const Art = ({ art, goToProductPage }) => {
-    const { id, title, imgLink, desc, dimensions, forSale, medium } = art
+    const { id, title, imgLink, desc, dimensions, forSale, medium, year } = art
 
     return (
         <ImageListItem
@@ -22,7 +26,6 @@ const Art = ({ art, goToProductPage }) => {
                 src={`${imgLink}?w=250&auto=format`}
                 srcSet={`${imgLink}?w=250&auto=format&dpr=2 2x`}
                 alt={title}
-                loading="lazy"
             />
             <ImageListItemBar
                 title={title}
@@ -35,10 +38,8 @@ const Art = ({ art, goToProductPage }) => {
 
 const ArtworkContainer = () => {
     const { artworkMap } = React.useContext(ArtworkContext);
-    const categories = ['prints', 'paintings', 'photography'];
-    const [activeCategory, setActiveCategory] = useState('prints');
-    //console.log(artworkMap[activeCategory]);
-    //console.log(artworkMap);
+    const categories = ['prints', 'paintings', 'digital media'];
+    const [activeCategory, setActiveCategory] = useState(null);
     const router = useRouter();
     // Navigate to product's page
     const goToProductPage = (artworkHandle, artworkInfo) => {
@@ -53,74 +54,59 @@ const ArtworkContainer = () => {
                 (artworkMap) ?
                 // iterate through keys
                 (
-                 // print one set at a time
-                 <Container maxWidth='xl'>
-                    <Box mt={2}>
-                        {categories.map((category) => (
-                            <Button key={category} onClick={() => setActiveCategory(category)}>
-                                <Typography color='#000000' variant='h5'>{category}</Typography>
-                            </Button>
-                        ))}
-                    </Box>
-                    <Box key='eqXsmall' sx={{display: {xs: 'inline', md:'none'}}}>
-                        <ImageList key={activeCategory} cols={1} gap={20}>
-                            {artworkMap[activeCategory].map((artworkInfo) => (
-                                <Art
-                                key={artworkInfo.id}
-                                art={artworkInfo}
-                                goToProductPage={goToProductPage}
-                                />
-                            ))}
-                        </ImageList>
-                    </Box>
-                    <Box key='gtMedium' sx={{display: {xs: 'none', md: 'inline'}}}>
-                        <ImageList key={activeCategory} cols={4} gap={10}>
-                            {artworkMap[activeCategory].map((artworkInfo) => (
-                                <Art
-                                key={artworkInfo.id}
-                                art={artworkInfo}
-                                goToProductPage={goToProductPage}
-                                />
-                            ))}
-                        </ImageList>
-                    </Box>
-                 </Container>
-                    
-                    
-                    
-                    
-                    
-                    
-                /*    
-                Object.keys(artworkMap).map((title) => (
-                    <Container maxWidth='xl' key={title}>
-                        <Box key='eqXsmall' sx={{display: {xs: 'inline', md:'none'}}}>
-                            <h3>{title.toUpperCase()}</h3>
-                            <ImageList key={title} cols={1} gap={20}>
-                                {artworkMap[title].map((artworkInfo) => (
-                                    <Art
-                                    key={artworkInfo.title}
-                                    art={artworkInfo}
-                                    goToProductPage={goToProductPage}
-                                    />
+                // if there is an active category, then display all contents and bold/underline category
+                    (activeCategory) ? (
+                        <Container maxWidth='xl'>
+                            <Box mt={2} sx={{display:'flex', flexDirection:'row', justifyContent:'center', alignContent:'center'}}>
+                                {categories.map((category) => (
+                                    // if category is equal to active category, render differently
+                                    (category === activeCategory) ? (
+                                        <Button disabled sx={{padding: 1, mx: 1}} size='medium' variant='contained' key={category} onClick={() => setActiveCategory(category)}>
+                                            <Typography color='#000000' variant='body'>{category}</Typography>
+                                        </Button>
+                                    ) : (
+                                        <Button sx={{padding: 1, mx: 1}} size='medium' variant='contained' key={category} onClick={() => setActiveCategory(category)}>
+                                            <Typography color='#000000' variant='body'>{category}</Typography>
+                                        </Button>
+                                    )
                                 ))}
-                            </ImageList>
-                        </Box>
-                        <Box key='gtMedium' sx={{display: {xs: 'none', md: 'inline'}}}>
-                            <h3>{title.toUpperCase()}</h3>
-                            <ImageList key={title} cols={4} gap={10}>
-                                {artworkMap[title].map((artworkInfo) => (
-                                    <Art
-                                    key={artworkInfo.title}
-                                    art={artworkInfo}
-                                    goToProductPage={goToProductPage}
-                                    />
+                            </Box>
+                            <Box key='eqXsmall' sx={{display: {xs: 'inline', md:'none'}}}>
+                                <ImageList key={activeCategory} cols={1} gap={20}>
+                                    {artworkMap[activeCategory].sort(compareDates).map((artworkInfo) => (
+                                        <Art
+                                        key={artworkInfo.id}
+                                        art={artworkInfo}
+                                        goToProductPage={goToProductPage}
+                                        />
+                                    ))}
+                                </ImageList>
+                            </Box>
+                            <Box key='gtMedium' sx={{display: {xs: 'none', md: 'inline'}}}>
+                                <ImageList key={activeCategory} cols={4} gap={10}>
+                                    {artworkMap[activeCategory].sort(compareDates).map((artworkInfo) => (
+                                        <Art
+                                        key={artworkInfo.id}
+                                        art={artworkInfo}
+                                        goToProductPage={goToProductPage}
+                                        />
+                                    ))}
+                                </ImageList>
+                            </Box>
+                        </Container>
+                    ) : (
+                        <Container maxWidth='xl'>
+                            <Box mt={2} sx={{display:'flex', flexDirection:'row', justifyContent:'center', alignContent:'center'}}>
+                                {categories.map((category) => (
+                                    <Button sx={{padding: 1, mx: 1}} size='medium' variant='contained' key={category} onClick={() => setActiveCategory(category)}>
+                                        <Typography color='#000000' variant='body'>{category}</Typography>
+                                    </Button>
                                 ))}
-                            </ImageList>
-                        </Box>
-                    </Container>
-                    
-                )) */) : (
+                            </Box>
+                            <Typography my={2} align='center'>Please select a category.</Typography>
+                        </Container>
+                    )
+                ) : (
                     <Spinner />
                 )
             }

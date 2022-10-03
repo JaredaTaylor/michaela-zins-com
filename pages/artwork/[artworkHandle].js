@@ -18,27 +18,12 @@ import Footer from '../../components/Footer/Footer';
 const ArtworkPage = () => {
 
     const router = useRouter();
-    const  { desc, dimensions, forSale, id, imgLink, medium, title } = router.query;
-    /*
-    const desc = "Print";
-    const dimensions = "X by Y";
-    const forSale = true;
-    const imgLink = "https://ik.imagekit.io/jaredtaylordev/prints/3_5_The_First_Star__Michaela_Zinsmeister_MMTAYYaN_.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1664122654638";
-    const medium = "Print";
-    const title = "The First Star";
-
-
-    const { desc, dimensions, forSale, imgLink, medium, title } = art
-    const { id, title, images, variants, handle } = product
-    const { src: productImage } = images[0]
-    const { price } = variants[0]
-    */
+    const  { desc, dimensions, forSale, id, imgLink, medium, title, year } = router.query;
 
     return (
         <Box>
             <GlobalNavigation />
             <Container maxWidth="lg">
-                <Button variant='text' href='/artwork' sx={{display: {sx:'inline', md:'none'}}}><Typography variant="h6" my={2} color='#000000'>back</Typography></Button>
                 <Box key='gtMedium' mt={4} container direction="row" sx={{display: {xs: 'none', md:'flex'}}}>
                     <Box mx={2} width='50%'>
                         <img
@@ -54,9 +39,11 @@ const ArtworkPage = () => {
                             <Grid container direction='column'>
                                 <Typography variant="body1" component="span">{desc}</Typography>
                                 <Typography variant="body1" component="span">{dimensions}</Typography>
-                                { /*forSale &&
-                                    <Typography variant="body1" component="span">Contact @MichaelaZinsmeister@gmail.com for purchase.</Typography>
-                                */}
+                                <Typography variant="body1" component="span">{year}</Typography>
+                                { (forSale === true) ? (
+                                    <Typography variant="body1" component="span">Contact michaelazinsmeister@gmail.com for purchase.</Typography>
+                                ) : (<></>)
+                                }
                             </Grid>
                         </Grid>
                     </Box>
@@ -66,7 +53,7 @@ const ArtworkPage = () => {
 
 
 
-                <Grid key='ltMedium' container direction="column" sx={{display: {xs: 'flex', md:'none'}}}>
+                <Grid mt={4} key='ltMedium' container direction="column" sx={{display: {xs: 'flex', md:'none'}}}>
                     <Box mx={2} sx={{display:'flex'}}>
                         <img
                             src={imgLink}
@@ -81,8 +68,10 @@ const ArtworkPage = () => {
                             <Grid container direction='column'>
                                 <Typography variant="body1" component="span">{desc}</Typography>
                                 <Typography variant="body1" component="span">{dimensions}</Typography>
-                                { forSale &&
+                                <Typography variant="body1" component="span">{year}</Typography>
+                                { (forSale === true) ? (
                                     <Typography variant="body1" component="span">Contact michaelazinsmeister@gmail.com for purchase.</Typography>
+                                ) : (<></>)
                                 }
                             </Grid>
                         </Grid>
