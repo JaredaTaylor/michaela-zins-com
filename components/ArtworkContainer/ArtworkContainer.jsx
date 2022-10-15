@@ -10,6 +10,7 @@ import { ArtworkContext } from '../../context/artwork.context';
 import Spinner from '../spinner/spinner';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
+import Fade from '@mui/material/Fade';
 
 function compareDates(a, b) {
     return b.year - a.year;
@@ -19,20 +20,25 @@ const Art = ({ art, goToProductPage }) => {
     const { id, title, imgLink, desc, dimensions, forSale, medium, year } = art
 
     return (
-        <ImageListItem
-            style={{cursor: 'pointer'}}
-            onClick={() => goToProductPage(title, art)}>
-            <img
-                src={`${imgLink}?w=250&auto=format`}
-                srcSet={`${imgLink}?w=250&auto=format&dpr=2 2x`}
-                alt={title}
-            />
-            <ImageListItemBar
-                title={title}
-                subtitle={<span>{medium}</span>}
-                position="below"
-            />
-        </ImageListItem>
+        <Fade
+            in={true}
+            timeout={2000}
+        >
+            <ImageListItem
+                style={{cursor: 'pointer'}}
+                onClick={() => goToProductPage(title, art)}>
+                <img
+                    src={`${imgLink}?w=250&auto=format`}
+                    srcSet={`${imgLink}?w=250&auto=format&dpr=2 2x`}
+                    alt={title}
+                />
+                <ImageListItemBar
+                    title={title}
+                    subtitle={<span>{medium}</span>}
+                    position="below"
+                />
+            </ImageListItem>
+        </Fade>
     )
 };
 
@@ -40,10 +46,17 @@ const ArtworkContainer = () => {
     const { artworkMap } = React.useContext(ArtworkContext);
     const categories = ['prints', 'paintings', 'digital media'];
     const [activeCategory, setActiveCategory] = useState(null);
+    const [isShowing, setIsShowing] = useState(false);
     const router = useRouter();
     // Navigate to product's page
     const goToProductPage = (artworkHandle, artworkInfo) => {
         router.push({pathname: `/artwork/${artworkHandle}`, query: artworkInfo})
+    };
+
+    // Update activeCategory and isShowing
+    const openCategory = (category) => {
+        setActiveCategory(category);
+        setIsShowing(true);
     };
     
 
@@ -98,7 +111,7 @@ const ArtworkContainer = () => {
                         <Container maxWidth='xl'>
                             <Box mt={2} sx={{display:'flex', flexDirection:'row', justifyContent:'center', alignContent:'center'}}>
                                 {categories.map((category) => (
-                                    <Button sx={{padding: 1, mx: 1}} size='medium' variant='contained' key={category} onClick={() => setActiveCategory(category)}>
+                                    <Button sx={{padding: 1, mx: 1}} size='medium' variant='contained' key={category} onClick={() => openCategory(category)}>
                                         <Typography color='#000000' variant='body'>{category}</Typography>
                                     </Button>
                                 ))}
