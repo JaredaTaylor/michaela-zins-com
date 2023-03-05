@@ -43,9 +43,10 @@ const Art = ({ art, goToProductPage }) => {
 };
 
 const ArtworkContainer = () => {
-    const { artworkMap } = React.useContext(ArtworkContext);
+    const { artworkMap, selectedCategory, setSelectedCategory } = React.useContext(ArtworkContext);
     const categories = ['prints', 'paintings', 'digital media'];
-    const [activeCategory, setActiveCategory] = useState(null);
+    // have website remember context for category selection
+    const [activeCategory, setActiveCategory] = useState(selectedCategory); 
     const [isShowing, setIsShowing] = useState(false);
     const router = useRouter();
     // Navigate to product's page
@@ -58,6 +59,13 @@ const ArtworkContainer = () => {
         setActiveCategory(category);
         setIsShowing(true);
     };
+
+    // Update global prop and setActiveCategory
+    const updateCategory = (category) => {
+        setActiveCategory(category);
+        setSelected
+        // update chosenCategory info in artwork context?
+    }
     
 
     return (

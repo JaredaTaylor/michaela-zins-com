@@ -4,6 +4,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 
+// TODO: Not used currectly, remove?
 
 const ArtworkNavigation = () => {
     return (
