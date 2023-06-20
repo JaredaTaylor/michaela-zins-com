@@ -22,10 +22,10 @@
     "dashify": "^2.0.0",
     "firebase": "^9.10.0",
     "firebase-admin": "^11.0.1",
-    "next": "latest",
+    "next": "^13.4.6",
     "prop-types": "latest",
-    "react": "latest",
-    "react-dom": "latest",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
     "shopify-buy": "^2.16.1",
     "styled-components": "^5.3.6"

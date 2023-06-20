@@ -43,10 +43,11 @@ const Art = ({ art, goToProductPage }) => {
 };
 
 const ArtworkContainer = () => {
-    const { artworkMap, selectedCategory, setSelectedCategory } = React.useContext(ArtworkContext);
+    const { artworkMap } = React.useContext(ArtworkContext);
+    const [selectedCategory, setSelectedCategory] = React.useContext(ArtworkContext);
     const categories = ['prints', 'paintings', 'digital media'];
     // have website remember context for category selection
-    const [activeCategory, setActiveCategory] = useState(selectedCategory); 
+    const [activeCategory, setActiveCategory] = useState(null); 
     const [isShowing, setIsShowing] = useState(false);
     const router = useRouter();
     // Navigate to product's page
@@ -57,13 +58,14 @@ const ArtworkContainer = () => {
     // Update activeCategory and isShowing
     const openCategory = (category) => {
         setActiveCategory(category);
+        setSelectedCategory(category);
         setIsShowing(true);
     };
 
     // Update global prop and setActiveCategory
     const updateCategory = (category) => {
         setActiveCategory(category);
-        setSelected
+        setSelectedCategory(category);
         // update chosenCategory info in artwork context?
     }
     
@@ -82,11 +84,11 @@ const ArtworkContainer = () => {
                                 {categories.map((category) => (
                                     // if category is equal to active category, render differently
                                     (category === activeCategory) ? (
-                                        <Button disabled sx={{padding: 1, mx: 1}} size='medium' variant='contained' key={category} onClick={() => setActiveCategory(category)}>
+                                        <Button disabled sx={{padding: 1, mx: 1}} size='medium' variant='contained' key={category} onClick={() => updateCategory(category)}>
                                             <Typography color='#000000' variant='body'>{category}</Typography>
                                         </Button>
                                     ) : (
-                                        <Button sx={{padding: 1, mx: 1}} size='medium' variant='contained' key={category} onClick={() => setActiveCategory(category)}>
+                                        <Button sx={{padding: 1, mx: 1}} size='medium' variant='contained' key={category} onClick={() => updateCategory(category)}>
                                             <Typography color='#000000' variant='body'>{category}</Typography>
                                         </Button>
                                     )

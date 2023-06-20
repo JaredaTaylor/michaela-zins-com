@@ -19,7 +19,7 @@ export const ArtworkProvider = ({ children }) => {
         getArtworkMap();
     }, []);
 
-    const value = { artworkMap, selectedCategory, setSelectedCategory };
+    const value = { artworkMap, selectedCategory };
     return (
         <ArtworkContext.Provider value={value}>
             {children}

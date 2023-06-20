@@ -13,6 +13,7 @@ const clientSideEmotionCache = createEmotionCache();
 
 export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  const [selectedCategory, setSelectedCategory] = React.useState(null);
 
   return (
     <CacheProvider value={emotionCache}>
@@ -30,7 +31,7 @@ export default function MyApp(props) {
         <ArtworkProvider>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
-          <Component {...pageProps} />
+          <Component {selectedCategory, setSelectedCategory, ...pageProps} />
         </ArtworkProvider>
       </ThemeProvider>
     </CacheProvider>
