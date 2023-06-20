@@ -12,9 +12,9 @@ export default function Footer() {
                 <Link href='https://www.instagram.com/michaelaz.paints/'>
                     <FaInstagram size={22} color='black' />
                 </Link>
-                <Link href='https://hooplapress.ca/salon-gallery-shop/michaela-zinsmeister'>
+                {/* <Link href='https://hooplapress.ca/salon-gallery-shop/michaela-zinsmeister'>
                     <GiRhinocerosHorn size={22} color='black' />
-                </Link>
+                </Link> */}
             </Box>
         </BottomNavigation>
     )

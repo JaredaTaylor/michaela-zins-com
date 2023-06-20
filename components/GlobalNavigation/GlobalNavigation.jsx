@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Link from '@mui/material/Link';
 //import AdbIcon from '@mui/icons-material/Adb';
 
-const pages = ['artwork'];
+const pages = ['artwork', 'CV'];
 
 const GlobalNavigation = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -101,7 +101,7 @@ const GlobalNavigation = () => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
-                href={'/artwork'}
+                href={'/' + page}
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'black', display: 'block' }}

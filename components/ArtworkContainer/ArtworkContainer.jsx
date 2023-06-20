@@ -28,9 +28,10 @@ const Art = ({ art, goToProductPage }) => {
                 style={{cursor: 'pointer'}}
                 onClick={() => goToProductPage(title, art)}>
                 <img
-                    src={`${imgLink}?w=250&auto=format`}
-                    srcSet={`${imgLink}?w=250&auto=format&dpr=2 2x`}
+                    src={`${imgLink}?w=200&auto=format`}
+                    srcSet={`${imgLink}?w=200&auto=format&dpr=2 2x`}
                     alt={title}
+
                 />
                 <ImageListItemBar
                     title={title}
@@ -45,7 +46,7 @@ const Art = ({ art, goToProductPage }) => {
 const ArtworkContainer = () => {
     const { artworkMap } = React.useContext(ArtworkContext);
     const categories = ['prints', 'paintings', 'digital media'];
-    const [activeCategory, setActiveCategory] = useState(null);
+    const [activeCategory, setActiveCategory] = useState('prints');
     const [isShowing, setIsShowing] = useState(false);
     const router = useRouter();
     // Navigate to product's page
@@ -84,7 +85,7 @@ const ArtworkContainer = () => {
                                     )
                                 ))}
                             </Box>
-                            <Box key='eqXsmall' sx={{display: {xs: 'inline', md:'none'}}}>
+                            <Box px={4} key='eqXsmall' sx={{display: {xs: 'block', md:'none'}}}>
                                 <ImageList key={activeCategory} cols={1} gap={20}>
                                     {artworkMap[activeCategory].sort(compareDates).map((artworkInfo) => (
                                         <Art
@@ -95,8 +96,8 @@ const ArtworkContainer = () => {
                                     ))}
                                 </ImageList>
                             </Box>
-                            <Box key='gtMedium' sx={{display: {xs: 'none', md: 'inline'}}}>
-                                <ImageList key={activeCategory} cols={4} gap={10}>
+                            <Box px={4} key='gtMedium' sx={{display: {xs: 'none', md: 'block'}}}>
+                                <ImageList key={activeCategory} cols={2} gap={20}>
                                     {artworkMap[activeCategory].sort(compareDates).map((artworkInfo) => (
                                         <Art
                                         key={artworkInfo.id}
@@ -108,6 +109,7 @@ const ArtworkContainer = () => {
                             </Box>
                         </Container>
                     ) : (
+                        // No category selected
                         <Container maxWidth='xl'>
                             <Box mt={2} sx={{display:'flex', flexDirection:'row', justifyContent:'center', alignContent:'center'}}>
                                 {categories.map((category) => (
