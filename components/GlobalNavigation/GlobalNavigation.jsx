@@ -77,7 +77,7 @@ const GlobalNavigation = () => {
             >
             {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                <Link href={'/artwork'} underline="none" color="inherit"><Typography textAlign="center">{page}</Typography></Link>
+                <Link href={'/' + page} underline="none" color="inherit"><Typography textAlign="center">{page}</Typography></Link>
                 </MenuItem>
             ))}
             </Menu>
