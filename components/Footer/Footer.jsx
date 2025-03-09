@@ -9,7 +9,7 @@ export default function Footer() {
     return (
         <BottomNavigation sx={{width:'100%'}} >
             <Box  width={150} container direction="row" sx={{display:'flex', justifyContent:'space-evenly', alignItems:'center'}}>
-                <Link href='https://www.instagram.com/michaelaz.paints/'>
+                <Link href='https://www.instagram.com/michaelaz.prints/'>
                     <FaInstagram size={22} color='black' />
                 </Link>
                 {/* <Link href='https://hooplapress.ca/salon-gallery-shop/michaela-zinsmeister'>
