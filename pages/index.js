@@ -16,12 +16,13 @@ export default function Index({ products }) {
       >
         <Box
           key='gtMedium'
-          mx='5vw'
+          mx='20vw'
           sx={{
             display: {xs:'none', md:'flex'},
             flexDirection: 'column',
             alignItems: 'center',
           }}
+          // px={20}
         >
           <Box mx={10} mt={2} sx={{display:'flex'}}>
             <Box>
@@ -53,7 +54,7 @@ export default function Index({ products }) {
             alignItems: 'center',
           }}
         >
-          <Box mx={10} mt={2} sx={{display:'flex', flexDirection:'column' }}>
+          <Box mx={6} mt={2} sx={{display:'flex', flexDirection:'column' }}>
             <Box mx='10vw'>
               <Avatar
                 src='/Headshot_2.jpg'
