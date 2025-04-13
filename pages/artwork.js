@@ -5,6 +5,7 @@ import ArtworkContainer from '../components/ArtworkContainer/ArtworkContainer';
 //import Navigation from '../components/ArtworkNavigation/ArtworkNavigation';
 //import { shopifyClient, parseShopifyResponse } from '../utils/shopify';
 import GlobalNavigation from '../components/GlobalNavigation/GlobalNavigation';
+import { Typography } from '@mui/material';
 import Footer from '../components/Footer/Footer';
 import { ArtworkProvider } from '../context/artwork.context';
 
@@ -14,7 +15,8 @@ export default function Artwork() {
     <Box>
       <GlobalNavigation />
       <ArtworkProvider>
-        <Container maxWidth="lg">
+        <Container maxWidth="lg" sx={{ paddingY: 5 }}>
+          {/* <Typography variant="h3" gutterBottom>Artwork</Typography> */}
           <ArtworkContainer />
         </Container>
       </ArtworkProvider>

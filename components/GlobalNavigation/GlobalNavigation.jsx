@@ -12,9 +12,10 @@ import Button from '@mui/material/Button';
 //import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Link from '@mui/material/Link';
+import Exhibits from '../../pages/exhibits';
 //import AdbIcon from '@mui/icons-material/Adb';
 
-const pages = ['artwork', 'CV'];
+const pages = ['artwork', 'exhibits', 'CV'];
 
 const GlobalNavigation = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
